@@ -1,0 +1,36 @@
+select device_id, date_time, data ->>'temperature' as "temperature"
+from weather
+where data ->> 'temperature' is not null
+order by id desc
+limit 10
+
+LÄMPÖTILAN KESKIARVO
+select avg((data->>'temperature')::float) as "average temp" from weather
+
+KAIKKI DATA
+select * from weather
+
+50 VIIMEISINTÄ ARVOA
+select device_id, date_time, data
+from weather
+limit 50
+
+KYLMIN PÄIVÄ
+select * from weather
+where (data ->>'temperature')::float in (
+select min((data ->>'temperature')::float)
+from weather
+)
+
+5 TUULISINTA PÄIVÄÄ
+select * from weather
+where (data ->> 'wind_speed')::float is not null
+order by (data->>'wind_speed')::float is not null
+limit 5
+
+20 VIIMESINTÄ LÄMPÖTILAA
+select * from (select * from weather
+where data ->> 'temperature' is not null
+order by id desc
+limit 20) as data
+order by date_time
