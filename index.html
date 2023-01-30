@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Kertotaulu
+        </title>
+        <script>
+            console.log("kertolaskuja=");
+    function laskut() {
+        
+                siivoa();
+                for(let i = 1; i<=3; i++){
+                let a = Math.floor(Math.random() * 11); 
+                let b = Math.floor(Math.random() * 11);                
+                document.getElementById(`lasku${i}`).innerHTML = `${a} x ${b}`;
+                document.getElementById(`tulo${i}`).value = a * b;
+                } 
+    }                  
+            
+    function siivoa() {
+                for (let i=1; i<=3; i++) {
+                    document.getElementById(`palaute${i}`).innerHTML = "";
+                    document.getElementById(`vastaus${i}`).value = "";
+
+                }
+                document.getElementById(`palaute`).innerHTML = "";
+        }
+
+            function tarkista() {
+                    let oikein=0;
+                    for (let i=1; 1<=3; i++){
+                        let vastaus = document.getElementById(`vastaus${i}`).value;
+                        let tulo = document.getElementById(`tulo${i}`).value;
+
+                        if (vastaus == tulo) {
+                            oikein++;
+                            document.getElementById(`palaute${i}`).innerHTML="Oikein!";
+                        }
+                        
+                        else {
+                            document.getElementById(`palaute${i}`).innerHTML="Väärin";
+            
+                        }
+                     }
+                document.getElementById("palaute").innerHTML=`Sait ${oikein} / 3 oikein!`;
+            }
+
+        </script>
+    </head>
+    <body>
+        <style>
+            body {
+                background-image: url("antenna.gif");
+                background-color: rgb(115, 91, 97);
+                  }
+                h1 {
+                    color: white;
+                }
+                p  {
+                    color: white;
+                }
+                </style>
+        <h1>Tervetuloa laskemaan!</h1>
+        <p>Laske seuraavat laskut:</p>
+        <p> <label id="lasku1"> 1 x 3</label> <input type="text" id="vastaus1"> <label id="palaute1"> </label> 
+            <input id="tulo1" type="hidden"></p>
+        <p> <label id="lasku2"> 1 x 3 </label> <input type="text" id="vastaus2"> <label id="palaute2"> </label> 
+            <input id="tulo2" type="hidden"></p>
+        <p> <label id="lasku3"> 1 x 3</label> <input type="text" id="vastaus3"> <label id="palaute3"> </label> 
+            <input id="tulo3" type="hidden"></p>
+        
+
+        <p><label id="palaute">Sait 3/3 oikein!</label></p>
+        <p><button onclick="tarkista()">Tarkista</button><button onclick="laskut()">Uudelleen</button></p>
+            <script>laskut();</script>
+    
+    </body>
+
+</html>
